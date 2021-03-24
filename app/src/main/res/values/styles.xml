@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Defition du style de la police -->
+    <style name="Widget.TipTime.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:minHeight">48dp</item>  <!-- Definit ici la taille de la police -->
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+    </style>
+    <!-- Definition du style du bouton radio -->
+    <style name="Widget.TipTime.CompoundButton.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:paddingStart">8dp</item>    <!-- Espace entre le bouton radio et le texte -->
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+    </style>
+</resources>

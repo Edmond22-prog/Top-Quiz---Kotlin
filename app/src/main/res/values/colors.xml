@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- Couleurs theme SNK -->
+    <color name="red">#BF4953</color>
+    <color name="blue_dark">#010326</color>
+    <color name="yellow_mangoes">#F2C641</color>
+    <color name="orange">#F2A03D</color>
+    <color name="beige">#D9A679</color>
+</resources>
