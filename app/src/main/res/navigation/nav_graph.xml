@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.topquiz_kotlin.controler.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/gameSelectFragment"
+        android:name="com.example.topquiz_kotlin.controler.GameSelectFragment"
+        android:label="fragment_game_select"
+        tools:layout="@layout/fragment_game_select" >
+        <action
+            android:id="@+id/action_gameSelectFragment_to_gameActivity"
+            app:destination="@id/gameActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/gameActivity"
+        android:name="com.example.topquiz_kotlin.controler.GameActivity"
+        android:label="activity_game"
+        tools:layout="@layout/activity_game" />
+</navigation>

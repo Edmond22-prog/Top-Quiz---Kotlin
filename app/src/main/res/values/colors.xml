@@ -8,4 +8,11 @@
     <color name="yellow_mangoes">#F2C641</color>
     <color name="orange">#F2A03D</color>
     <color name="beige">#D9A679</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#0097A7</color>
+    <color name="teal_900">#006064</color>
+
+    <color name="blue_200">#62A3FF</color>
+    <color name="blue_700">#1675D1</color>
+    <color name="blue_900">#004A9F</color>
 </resources>

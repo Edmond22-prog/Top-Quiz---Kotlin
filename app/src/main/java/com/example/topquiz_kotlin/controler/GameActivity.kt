@@ -22,11 +22,14 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mButtonAnswer2: Button
     private lateinit var mButtonAnswer3: Button
     private lateinit var mButtonAnswer4: Button
+    private lateinit var mQuestionNumber: TextView
 
     private lateinit var mQuestionBank: QuestionBank
     private lateinit var mQuestion: Question
     private var mNumberOfQuestion = 0
     private var mScore = 0
+    private var mNumberCurrentQuestion = 1
+    val numberOfQuestion = 10
 
     /* Booleen verifiant si l'action de l'utilisateur est pris en compte ou pas :
     true pour oui et false pour non */
@@ -39,6 +42,8 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         /* Variables de classe stockant les cles du score et du nombre de question en cours */
         const val BUNDLE_STATE_SCORE = "currentScore"
         const val BUNDLE_STATE_QUESTION = "currentQuestion"
+
+        const val BUNDLE_STATE_NUM_CURRENT_QUESTION = "numberCurrentQuestion"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,11 +55,14 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         if(savedInstanceState != null){
             mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE)
             mNumberOfQuestion = savedInstanceState.getInt(BUNDLE_STATE_QUESTION)
+            mNumberCurrentQuestion = savedInstanceState.getInt(BUNDLE_STATE_NUM_CURRENT_QUESTION)
         }else{
             mScore = 0
-            mNumberOfQuestion = 10
+            mNumberOfQuestion = numberOfQuestion
+            mNumberCurrentQuestion = 1
         }
 
+        mQuestionNumber = findViewById<TextView>(R.id.number_current_question)
         mGameQuestion = findViewById<TextView>(R.id.game_question)
         mButtonAnswer1 = findViewById<Button>(R.id.game_answer1)
         mButtonAnswer2 = findViewById<Button>(R.id.game_answer2)
@@ -341,6 +349,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun displayQuestion(question : Question){
+        mQuestionNumber.text = "${mNumberCurrentQuestion}/${numberOfQuestion}"
         mGameQuestion.text = question.getQuestion()
         val reponse = question.getChoiceList()
         mButtonAnswer1.setText(reponse.get(0))
@@ -354,6 +363,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
 
         outState.putInt(BUNDLE_STATE_SCORE, mScore)
         outState.putInt(BUNDLE_STATE_QUESTION, mNumberOfQuestion)
+        outState.putInt(BUNDLE_STATE_NUM_CURRENT_QUESTION, mNumberCurrentQuestion)
     }
 
     override fun onClick(v: View?) {
@@ -366,6 +376,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         }
         mEnableTouchEvents = false
         mNumberOfQuestion--
+        mNumberCurrentQuestion++
 
         /* La classe Handler permet de communiquer avec systeme
            La methode .postDelayed permettant d'effectuer une tache apres une duree de temps precise
