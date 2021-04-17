@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.topquiz_kotlin.R
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mGreetingText: TextView
     private lateinit var mNameInput: TextInputEditText
+    private lateinit var mQuizOptions: RadioGroup
     private lateinit var mPlayButton: Button
 
     private lateinit var mUser: User
@@ -34,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         // Variable d'instance definissant l'identifiant du score de l'utilisateur/joueur
         const val SCORE_PLAYER = "SCORE_PLAYER"
+
+        // Variables d'instance envoyant l'information dans la GameActivite et celle stockant l'information
+        const val SELECTED_QUIZ = "selectedQuiz"
+        const val CURRENT_SELECTED_QUIZ = "currentSelectedQuiz"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         mGreetingText = findViewById<TextView>(R.id.text_start)
         mNameInput = findViewById<TextInputEditText>(R.id.edit_start_text)
         mPlayButton = findViewById<Button>(R.id.first_button)
+        mQuizOptions = findViewById(R.id.quiz_options)
 
         mPlayButton.isEnabled = false   // Desactive le button au demarrage
 
@@ -69,11 +76,19 @@ class MainActivity : AppCompatActivity() {
         mPlayButton.setOnClickListener {
             /* Instructions permettant de quitter d'une activite a une autre */
             val gameActivity = Intent(this@MainActivity, GameActivity::class.java)
+            val selectedQuiz = when(mQuizOptions.checkedRadioButtonId){
+                R.id.quiz_option_1 -> 1
+                R.id.quiz_option_2 -> 2
+                R.id.quiz_option_3 -> 3
+                else -> 4
+            }
+            gameActivity.putExtra(SELECTED_QUIZ, selectedQuiz) // Envoi du quiz choisi dans la GameActivity
             startActivityForResult(gameActivity, GAME_ACTIVITY_REQUEST_CODE) // Demarrage de l'activite avec attente de resultat
 
             mUser.setFirstName(mNameInput.text.toString())
-            // Insertion du nom dans le fichier
+            // Insertion du nom et du quiz choisi dans le fichier
             mPreferences.edit().putString(FIRSTNAME_PLAYER, mUser.getFirstName()).apply()
+            mPreferences.edit().putInt(CURRENT_SELECTED_QUIZ, selectedQuiz).apply()
         }
     }
 
@@ -88,7 +103,6 @@ class MainActivity : AppCompatActivity() {
         if(GAME_ACTIVITY_REQUEST_CODE == requestCode && Activity.RESULT_OK == resultCode){
             // Recuperation du score et du nombre de question pose de l'activite
             val score = data?.getIntExtra(GameActivity.BUNDLE_EXTRA_SCORE, 0)
-            val nombreQuestion = data?.getIntExtra(GameActivity.BUNDLE_STATE_QUESTION, 0)
             if (score != null) {
                 // Insertion du score dans le fichier
                 mPreferences.edit().putInt(SCORE_PLAYER, score).apply()
@@ -102,16 +116,30 @@ class MainActivity : AppCompatActivity() {
         val firstname = mPreferences.getString(FIRSTNAME_PLAYER, null)
         if(firstname != null){
             val score = mPreferences.getInt(SCORE_PLAYER, 0)
+            val quiz = when(mPreferences.getInt(CURRENT_SELECTED_QUIZ, 2)){
+                1 -> "Naruto Shippuden"
+                2 -> "Shingeki No Kyojin"
+                3 -> "One Piece"
+                else -> "My Hero Academia"
+            }
             if(score >= 10){
-                val salutation = "Bon retour, ${firstname} !\nTon dernier score etait de ${score}/10, une nouvelle partie ?"
+                val salutation = "Bon retour, ${firstname} !\nTon dernier score etait de ${score}/10 dans le quiz ${quiz}, une nouvelle partie ?"
                 mGreetingText.text = salutation
             }else{
-                val salutation = "Bon retour, ${firstname} !\nTon dernier score etait de ${score}/10, feras-tu mieux cette fois ?"
+                val salutation = "Bon retour, ${firstname} !\nTon dernier score etait de ${score}/10 dans le quiz ${quiz}, feras-tu mieux cette fois ?"
                 mGreetingText.text = salutation
             }
             mNameInput.setText(firstname)
             mNameInput.setSelection(firstname.length)
             mPlayButton.isEnabled = true
+
+            // Coche la dernier case de quiz choisie
+            mQuizOptions.check(when(quiz){
+                "Naruto Shippuden" -> R.id.quiz_option_1
+                "Shingeki No Kyojin" -> R.id.quiz_option_2
+                "One Piece" -> R.id.quiz_option_3
+                else -> R.id.quiz_option_4
+            })
         }
     }
 
