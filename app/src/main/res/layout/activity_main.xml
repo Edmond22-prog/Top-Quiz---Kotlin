@@ -1,89 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".controler.MainActivity"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/text_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bienvenue dans Top Quiz. Quel est votre prenom ?"
-        android:layout_margin="10dp"
-        android:padding="20dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_start"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart ="30dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Votre prenom">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_start_text"
+        <TextView
+            android:id="@+id/text_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenue dans Top Quiz. Quel est votre prenom ?"
+            android:layout_margin="10dp"
+            android:padding="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_start"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart ="30dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Votre prenom">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_start_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/question_quiz_choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quel quiz voulez-vous essayer ?"
-        android:layout_margin="10dp"
-        android:padding="20dp"
-        android:layout_gravity="center"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <RadioGroup
-        android:id="@+id/quiz_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:checkedButton="@id/quiz_option_2">
-
-        <RadioButton
-            android:id="@+id/quiz_option_1"
+        <TextView
+            android:id="@+id/question_quiz_choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Naruto Shippuden"
-            android:textStyle="italic"/>
+            android:text="Quel quiz voulez-vous essayer ?"
+            android:layout_margin="10dp"
+            android:padding="20dp"
+            android:layout_gravity="center"/>
 
-        <RadioButton
-            android:id="@+id/quiz_option_2"
+        <RadioGroup
+            android:id="@+id/quiz_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shingeki No Kyojin"
-            android:textStyle="italic"/>
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:checkedButton="@id/quiz_option_2">
 
-        <RadioButton
-            android:id="@+id/quiz_option_3"
+            <RadioButton
+                android:id="@+id/quiz_option_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Naruto Shippuden"
+                android:textStyle="italic"/>
+
+            <RadioButton
+                android:id="@+id/quiz_option_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shingeki No Kyojin"
+                android:textStyle="italic"/>
+
+            <RadioButton
+                android:id="@+id/quiz_option_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="One Piece"
+                android:textStyle="italic"/>
+
+            <RadioButton
+                android:id="@+id/quiz_option_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Hero Academia"
+                android:textStyle="italic"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/first_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="One Piece"
-            android:textStyle="italic"/>
+            android:layout_marginTop="20dp"
+            android:padding="30dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Let's play" />
 
-        <RadioButton
-            android:id="@+id/quiz_option_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Hero Academia"
-            android:textStyle="italic"/>
-
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/first_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="30dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Let's play" />
-
-</LinearLayout>
+    </LinearLayout>
+    
+</ScrollView>
